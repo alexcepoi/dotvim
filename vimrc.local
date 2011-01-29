@@ -1,0 +1,38 @@
+" Indentation options
+filetype indent on
+set autoindent
+set smartindent
+
+" Search options
+set incsearch
+set ignorecase
+set smartcase
+
+" Navigation options
+set showmatch
+set scrolloff=5
+set wildmode=longest,list
+
+"Backup options
+set directory=/var/tmp/vim
+
+" Load plugins
+let mapleader=","
+set runtimepath+=/etc/vim/runtime
+
+" Preferences by filetype
+autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+" Rails
+let g:rubycomplete_rails = 1
+
+" Fuzzy Finder
+map <leader>fb :FufBuffer<CR>
+map <leader>ff :FufFile<CR>
+map <leader>fc :FufCoverageFile<CR>
+map <leader>fd :FufDir<CR>
+
+" Nerd TREE
+map <leader>d :NERDTreeToggle<CR>
