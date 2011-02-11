@@ -1,5 +1,6 @@
 " Indentation options
 filetype indent on
+
 set autoindent
 set smartindent
 
@@ -13,12 +14,16 @@ set showmatch
 set scrolloff=5
 set wildmode=longest,list
 
-"Backup options
-set directory=/var/tmp/vim
+" Backup options
+" set directory=/var/tmp/vim
 
 " Load plugins
 let mapleader=","
+
 set runtimepath+=/etc/vim/runtime
+call pathogen#runtime_append_all_bundles()
+filetype off
+filetype plugin indent on
 
 " Preferences by filetype
 autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
