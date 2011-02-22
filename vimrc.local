@@ -9,6 +9,7 @@ set smartindent
 set incsearch
 set ignorecase
 set smartcase
+nnoremap <return> :let @/ = ""<return>:<backspace><return>
 
 " Navigation options
 set showmatch
