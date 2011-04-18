@@ -1,46 +1,67 @@
-" Indentation options
+"" General options
+set title
+set hidden
+set ruler
+
+let mapleader=","
+highlight PmenuSel ctermbg=0 guibg=DarkGrey
+
+"" Indentation options
 syntax on
 filetype indent on
 
 set autoindent
 set smartindent
 
-" Search options
+"" Search options
 set incsearch
 set ignorecase
 set smartcase
-nnoremap <return> :let @/ = ""<return>:<backspace><return>
 
-" Navigation options
+"" Navigation options
 set showmatch
 set scrolloff=5
 set wildmode=longest,list
+set splitbelow
+set splitright
 
-" Backup options
-" set directory=/var/tmp/vim
-
-" Load plugins
-let mapleader=","
-
+"" Load plugins
 set runtimepath+=/etc/vim/runtime
+let g:vimball_home="/etc/vim/runtime"
 call pathogen#runtime_append_all_bundles()
+
 filetype off
 filetype plugin indent on
 
-" Preferences by filetype
-autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-autocmd Filetype coffee setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-
-" Rails
-let g:rubycomplete_rails = 1
-
-" Fuzzy Finder
+"" Fuzzy Finder
 map <leader>fb :FufBuffer<CR>
 map <leader>ff :FufFile<CR>
 map <leader>fc :FufCoverageFile<CR>
 map <leader>fd :FufDir<CR>
 
-" Nerd TREE
+"" Nerd TREE
 map <leader>d :NERDTreeToggle<CR>
+
+"" Indentation
+autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd Filetype coffee setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+
+"" Autocomplete
+set completeopt=longest,menuone,preview
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<C-X><C-O>"
+
+"" Mappings
+" type <enter> after search to clear results
+nnoremap <silent> <return> :noh<return><return>
+
+" show trailing whitespace <,s>
+set listchars=tab:>\ ,trail:-
+nmap <silent> <leader>s :set nolist!<CR>
