@@ -54,7 +54,7 @@ set completeopt=longest,menuone,preview
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
+let g:SuperTabLongestHighlight = 0
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<C-X><C-O>"
 
