@@ -43,11 +43,14 @@ map <leader>fd :FufDir<CR>
 map <leader>d :NERDTreeToggle<CR>
 
 "" Indentation
+autocmd BufRead,BufNewFile Cakefile set filetype=python
 autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype coffee setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+autocmd Filetype c,cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4
+autocmd Filetype tex setlocal textwidth=100
 
 "" Autocomplete
 set completeopt=longest,menuone,preview
