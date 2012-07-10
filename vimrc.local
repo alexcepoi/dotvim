@@ -4,7 +4,6 @@ set hidden
 set ruler
 
 let mapleader=","
-highlight PmenuSel ctermbg=0 guibg=DarkGrey
 
 "" Indentation options
 syntax on
@@ -12,6 +11,7 @@ filetype indent on
 
 set autoindent
 set smartindent
+set pastetoggle=<F2>
 
 "" Search options
 set incsearch
@@ -49,7 +49,8 @@ autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype coffee setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd Filetype rst setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype c,cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 autocmd Filetype tex setlocal textwidth=100 noexpandtab
 
