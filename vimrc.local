@@ -3,6 +3,8 @@ set title
 set hidden
 set ruler
 
+set background=light
+
 let mapleader=","
 
 "" Indentation options
