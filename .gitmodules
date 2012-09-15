@@ -1,6 +1,21 @@
-[submodule "runtime/bundle/vim-coffee-script"]
-	path = runtime/bundle/vim-coffee-script
+[submodule "bundle/vim-pathogen"]
+	path = bundle/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule "bundle/vim-rails"]
+	path = bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule "bundle/vim-coffee-script"]
+	path = bundle/vim-coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
-[submodule "runtime/bundle/vim-flake8"]
-	path = runtime/bundle/vim-flake8
+[submodule "bundle/vim-flake8"]
+	path = bundle/vim-flake8
 	url = git://github.com/nvie/vim-flake8.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/ack.vim"]
+	path = bundle/ack.vim
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "bundle/buftabs"]
+	path = bundle/buftabs
+	url = git://github.com/vim-scripts/buftabs.git

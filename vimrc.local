@@ -1,52 +1,75 @@
-"" General options
+""" VIM options
+set nocompatible
+let mapleader=","
+
+
+""" Pathogen
+set runtimepath+=/etc/vim
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+call pathogen#helptags()
+
+
+""" General options
 set title
 set hidden
 set ruler
+set autoread
+set showcmd
+set showmode
+set history=1000
 
 set background=light
 
-let mapleader=","
 
-"" Indentation options
+""" Indentation options
 syntax on
 filetype indent on
+filetype plugin indent on
 
 set autoindent
 set smartindent
 set pastetoggle=<F2>
 
-"" Search options
+
+""" Search options
 set incsearch
+set hlsearch
 set ignorecase
 set smartcase
 
-"" Navigation options
+
+""" Navigation options
 set showmatch
 set scrolloff=5
 set wildmode=longest,list
 set splitbelow
 set splitright
 
-"" Load plugins
-set runtimepath+=/etc/vim/runtime
-let g:vimball_home="/etc/vim/runtime"
-call pathogen#runtime_append_all_bundles()
 
-filetype off
-filetype plugin indent on
+""" Status line
+let g:buftabs_in_statusline=1
+let g:buftabs_active_highlight_group="ActiveBuffer"
+let g:buftabs_separator="."
+let g:buftabs_marker_modified="*"
 
-"" Fuzzy Finder
-map <leader>fb :FufBuffer<CR>
-map <leader>ff :FufFile<CR>
-map <leader>fc :FufCoverageFile<CR>
-map <leader>fd :FufDir<CR>
+set laststatus=2
+set statusline=
+set statusline+=#{buftabs}%=                                " buftabs
+set statusline+=%2*%y                                       " filetype
+set statusline+=%1*\ %{''.(&fenc!=''?&fenc:&enc).''}        " encoding
+set statusline+=%4*%{(&bomb?\"[B]\":\"\")}                  " BOM mode
+set statusline+=%1*\ [%{&ff}]                               " file format
+set statusline+=\ %8.0(L\ %l%)/%3*%L%1*\ \ C\ %-6.c\ %P     " file position
 
-"" Nerd TREE
-map <leader>d :NERDTreeToggle<CR>
+highlight ActiveBuffer ctermfg=0 ctermbg=3
+highlight User1 term=bold,reverse cterm=bold,reverse
+highlight User2 term=bold,reverse cterm=bold,reverse ctermbg=1
+highlight User3 term=reverse cterm=reverse ctermbg=2
+highlight User4 term=bold,reverse cterm=bold,reverse ctermbg=4
 
-"" Indentation
-autocmd BufNewFile,BufRead Cakefile set filetype=python
 
+""" Indentation
 autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype coffee setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -55,17 +78,27 @@ autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype rst setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype c,cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 autocmd Filetype tex setlocal textwidth=100 noexpandtab
+"autocmd BufNewFile,BufRead Cakefile set filetype=python
 
-"" Autocomplete
+
+""" Autocomplete
 set completeopt=longest,menuone,preview
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 0
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<C-X><C-O>"
 
-"" Mappings
+""" Remember cursor positions
+autocmd BufReadPost *
+\ if ! exists("g:leave_my_cursor_position_alone") |
+\     if line("'\"") > 0 && line ("'\"") <= line("$") |
+\         exe "normal g'\"" |
+\     endif |
+\ endif
+
+
+""" Mappings
+" yank from the cursor to the end of the line, to be consistent with C and D.
+nnoremap Y y$
+
 " type <enter> after search to clear results
 nnoremap <silent> <return> :noh<return><return>
 
