@@ -10,12 +10,21 @@
 [submodule "bundle/vim-flake8"]
 	path = bundle/vim-flake8
 	url = git://github.com/nvie/vim-flake8.git
-[submodule "bundle/nerdcommenter"]
-	path = bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
 [submodule "bundle/ack.vim"]
 	path = bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/buftabs"]
 	path = bundle/buftabs
 	url = git://github.com/vim-scripts/buftabs.git
+[submodule "bundle/vim-json"]
+	path = bundle/vim-json
+	url = https://github.com/elzr/vim-json
+[submodule "bundle/cvs.vim"]
+	path = bundle/cvs.vim
+	url = git://github.com/chrisbra/csv.vim.git
+[submodule "bundle/tcomment"]
+	path = bundle/tcomment
+	url = git://github.com/tomtom/tcomment_vim.git
+[submodule "bundle/csv.vim"]
+	path = bundle/csv.vim
+	url = git://github.com/chrisbra/csv.vim.git

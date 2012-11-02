@@ -14,9 +14,12 @@ call pathogen#helptags()
 set title
 set hidden
 set ruler
+set nobackup
+set noswapfile
 set autoread
 set showcmd
 set showmode
+set mouse=a
 set history=1000
 
 set background=light
@@ -70,6 +73,7 @@ highlight User4 term=bold,reverse cterm=bold,reverse ctermbg=4
 
 
 """ Indentation
+autocmd Filetype vim setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype coffee setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -96,12 +100,34 @@ autocmd BufReadPost *
 
 
 """ Mappings
+map <C-h> :bprev<cr>
+map <C-l> :bnext<cr>
+map <C-k> :bdel!<cr>
+map <C-j> :edit
+
 " yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
 " type <enter> after search to clear results
-nnoremap <silent> <return> :noh<return><return>
+nnoremap <silent> <cr> :silent noh<cr><cr>
 
 " show trailing whitespace <,s>
 set listchars=tab:>\ ,trail:-
-nmap <silent> <leader>s :set nolist!<CR>
+nmap <silent> <leader>s :set nolist!<cr>
+
+" mac os specific mappings
+if has('unix')
+    if system('uname') =~ 'Darwin'
+        " ctrl-x for cut
+        vmap <silent> <C-x> d:call system("pbcopy", getreg("\""))<cr>
+        nmap <silent> <C-x> :%!pbcopy<cr>
+
+        " ctrl-c for copy
+        vmap <silent> <C-c> y:call system("pbcopy", getreg("\""))<cr>
+        nmap <silent> <C-c> :w !pbcopy<cr><cr>
+
+        " ctrl-v for paste
+        nmap <silent> <C-v> :r !pbpaste<cr>
+        imap <silent> <C-v> <esc>:r !pbpaste<cr>i
+   endif
+endif
