@@ -1,13 +1,25 @@
 """ VIM options
 set nocompatible
+set backspace=2
 let mapleader=","
 
 
-""" Pathogen
-set runtimepath+=/etc/vim
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+""" Vundle
+filetype off
+set rtp+=/etc/vim/bundle/Vundle.vim
+call vundle#begin('/etc/vim/bundle')
+
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'kien/ctrlp.vim'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'bling/vim-airline'
+
+Plugin 'amiorin/vim-project'
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
+filetype plugin indent on
 
 
 """ General options
@@ -41,6 +53,14 @@ set hlsearch
 set ignorecase
 set smartcase
 
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+    \ 'fallback': 'find %s -type f',
+\ }
+
 
 """ Navigation options
 set showmatch
@@ -49,27 +69,13 @@ set wildmode=longest,list
 set splitbelow
 set splitright
 
+set number
+highlight LineNr ctermfg=gray ctermbg=black
+
 
 """ Status line
-let g:buftabs_in_statusline=1
-let g:buftabs_active_highlight_group="ActiveBuffer"
-let g:buftabs_separator="."
-let g:buftabs_marker_modified="*"
-
 set laststatus=2
-set statusline=
-set statusline+=#{buftabs}%=                                " buftabs
-set statusline+=%2*%y                                       " filetype
-set statusline+=%1*\ %{''.(&fenc!=''?&fenc:&enc).''}        " encoding
-set statusline+=%4*%{(&bomb?\"[B]\":\"\")}                  " BOM mode
-set statusline+=%1*\ [%{&ff}]                               " file format
-set statusline+=\ %8.0(L\ %l%)/%3*%L%1*\ \ C\ %-6.c\ %P     " file position
-
-highlight ActiveBuffer ctermfg=0 ctermbg=3
-highlight User1 term=bold,reverse cterm=bold,reverse
-highlight User2 term=bold,reverse cterm=bold,reverse ctermbg=1
-highlight User3 term=reverse cterm=reverse ctermbg=2
-highlight User4 term=bold,reverse cterm=bold,reverse ctermbg=4
+let g:airline#extensions#tabline#enabled = 1
 
 
 """ Indentation
@@ -81,8 +87,7 @@ autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype rst setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype c,cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
-autocmd Filetype tex setlocal textwidth=100 noexpandtab
-"autocmd BufNewFile,BufRead Cakefile set filetype=python
+autocmd Filetype tex setlocal textwidth=80 noexpandtab linebreak
 
 
 """ Autocomplete
