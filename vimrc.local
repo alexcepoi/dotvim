@@ -1,6 +1,5 @@
 """ VIM options
 set nocompatible
-set backspace=2
 let mapleader=","
 
 
@@ -9,17 +8,57 @@ filetype off
 set rtp+=/etc/vim/bundle/Vundle.vim
 call vundle#begin('/etc/vim/bundle')
 
+" interface
 Plugin 'gmarik/Vundle.vim'
-
-Plugin 'kien/ctrlp.vim'
-Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
-
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-vinegar'
 Plugin 'amiorin/vim-project'
+Plugin 'tomtom/tcomment_vim'
+
+" addons
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
+
+" languages
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 call vundle#end()
 filetype plugin indent on
+
+
+""" Plugins
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamecollapse=0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='bubblegum'
+
+let g:gist_detect_filetype=1
+let g:gist_open_browser_after_post=1
+let g:gist_show_privates=1
+let g:gist_post_private=1
+
+let g:ctrlp_user_command={
+    \'types': {
+        \1: ['.git', 'cd %s && git ls-files'],
+        \2: ['.hg', 'hg --cwd %s locate -I .'],
+    \},
+    \'fallback': 'find %s -type f',
+\}
+
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_highlighting=0
+let g:airline#extensions#whitespace#enabled=0
+let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_loc_list_height=5
+
+let g:gitgutter_sign_column_always=1
+highlight SignColumn ctermbg=black
 
 
 """ General options
@@ -44,6 +83,8 @@ filetype plugin indent on
 
 set autoindent
 set smartindent
+set backspace=2
+set clipboard=unnamed
 set pastetoggle=<F2>
 
 
@@ -52,14 +93,6 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-
-let g:ctrlp_user_command = {
-    \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ },
-    \ 'fallback': 'find %s -type f',
-\ }
 
 
 """ Navigation options
@@ -70,12 +103,13 @@ set splitbelow
 set splitright
 
 set number
-highlight LineNr ctermfg=gray ctermbg=black
+highlight LineNr ctermfg=yellow ctermbg=black
 
 
 """ Status line
 set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
+set noshowmode
+set ttimeoutlen=50
 
 
 """ Indentation
@@ -108,9 +142,9 @@ autocmd BufReadPost *
 map <C-h> :bprev<cr>
 map <C-l> :bnext<cr>
 map <C-k> :bdel!<cr>
-map <C-j> :edit
+map <C-j> :edit 
 
-" yank from the cursor to the end of the line, to be consistent with C and D.
+" make Y behave like other capitals
 nnoremap Y y$
 
 " type <enter> after search to clear results
@@ -119,20 +153,3 @@ nnoremap <silent> <cr> :silent noh<cr><cr>
 " show trailing whitespace <,s>
 set listchars=tab:>\ ,trail:-
 nmap <silent> <leader>s :set nolist!<cr>
-
-" mac os specific mappings
-if has('unix')
-    if system('uname') =~ 'Darwin'
-        " ctrl-x for cut
-        vmap <silent> <C-x> d:call system("pbcopy", getreg("\""))<cr>
-        nmap <silent> <C-x> :%!pbcopy<cr>
-
-        " ctrl-c for copy
-        vmap <silent> <C-c> y:call system("pbcopy", getreg("\""))<cr>
-        nmap <silent> <C-c> :w !pbcopy<cr><cr>
-
-        " ctrl-v for paste
-        nmap <silent> <C-v> :r !pbpaste<cr>
-        imap <silent> <C-v> <esc>:r !pbpaste<cr>i
-   endif
-endif
