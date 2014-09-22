@@ -1,7 +1,8 @@
-map <C-h> :bprev<cr>
-map <C-l> :bnext<cr>
-map <C-j> :bdel!<cr>
-map <C-k> :edit 
+" move buffers
+map <C-h> :bp<cr>
+map <C-l> :bn<cr>
+map <C-j> :bd!<cr>
+map <C-k> :e 
 
 " make Y behave like other capitals
 nnoremap Y y$
