@@ -17,7 +17,6 @@ set mouse=a
 set history=1000
 
 set guioptions-=T
-set background=light
 
 
 """ Indentation
@@ -43,14 +42,13 @@ set splitbelow
 set splitright
 
 set number
-highlight LineNr ctermfg=yellow ctermbg=black
-
 set laststatus=2
 set noshowmode
 set ttimeoutlen=50
 
 
 """ Load plugins and start
+set rtp+=/etc/vim
 runtime! conf.d/*.vim
 
 syntax on

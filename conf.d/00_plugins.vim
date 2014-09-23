@@ -2,6 +2,7 @@ set rtp+=/etc/vim/bundle/Vundle.vim
 call vundle#begin('/etc/vim/bundle')
 
 Plugin 'gmarik/Vundle.vim'
+Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'felikz/ctrlp-py-matcher'
@@ -18,6 +19,16 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 call vundle#end()
 
+
+" colorscheme
+if has('gui_running')
+    set background=dark
+    colorscheme base16-default
+else
+    set background=light
+    highlight LineNr ctermfg=yellow ctermbg=black
+    highlight SignColumn ctermbg=black
+end
 
 " airline
 let g:airline_left_sep=''
@@ -56,4 +67,3 @@ let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
 " gutter
 let g:gitgutter_sign_column_always=1
-highlight SignColumn ctermbg=black
