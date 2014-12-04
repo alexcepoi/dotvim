@@ -17,6 +17,10 @@ set mouse=a
 set history=1000
 
 set guioptions-=T
+set guioptions-=m
+set guioptions-=r
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 
 """ Indentation

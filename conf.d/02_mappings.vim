@@ -4,6 +4,9 @@ map <C-l> :bn<cr>
 map <C-j> :bd!<cr>
 map <C-k> :e 
 
+" change directory to current file
+map <leader>d :cd %:p:h<cr>
+
 " make Y behave like other capitals
 nnoremap Y y$
 

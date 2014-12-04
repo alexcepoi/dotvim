@@ -14,6 +14,7 @@ Plugin 'mattn/gist-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
+Plugin 'nacitar/terminalkeys.vim'
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
@@ -26,8 +27,9 @@ if has('gui_running')
     colorscheme base16-default
 else
     set background=light
-    highlight LineNr ctermfg=yellow ctermbg=black
-    highlight SignColumn ctermbg=black
+    hi LineNr ctermfg=yellow ctermbg=none
+    hi SignColumn ctermbg=none
+    hi Visual cterm=reverse ctermbg=Black
 end
 
 " airline
@@ -60,8 +62,13 @@ let g:ctrlp_user_command={
 \}
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
+let g:ctrlp_map = '<leader>q'
+nnoremap <leader>w :CtrlPCurWD<cr>
+nnoremap <leader>e :CtrlPClearCache<cr>
+
 " syntastic
 let g:syntastic_check_on_open=1
+let g:syntastic_mode_map = {'mode': 'passive'}
 let g:syntastic_enable_highlighting=0
 let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
