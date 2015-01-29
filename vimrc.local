@@ -13,12 +13,12 @@ set noswapfile
 set autoread
 set showcmd
 set showmode
-set mouse=a
 set history=1000
 
 set guioptions-=T
 set guioptions-=m
 set guioptions-=r
+set guioptions-=L
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
@@ -28,6 +28,7 @@ set autoindent
 set smartindent
 set backspace=2
 set clipboard=unnamed,unnamedplus
+set colorcolumn=80
 
 
 """ Search
@@ -44,6 +45,7 @@ set scrolloff=5
 set wildmode=longest,list
 set splitbelow
 set splitright
+set nofoldenable
 
 set number
 set laststatus=2
