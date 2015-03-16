@@ -1,3 +1,5 @@
+" plugins setup
+filetype off
 set rtp+=/etc/vim/bundle/Vundle.vim
 call vundle#begin('/etc/vim/bundle')
 
@@ -28,6 +30,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 
 call vundle#end()
+filetype plugin indent on
 
 
 " colorscheme

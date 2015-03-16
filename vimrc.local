@@ -1,6 +1,6 @@
 """ Setup
 set nocompatible
-filetype off
+syntax on
 let mapleader=","
 
 
@@ -56,7 +56,3 @@ set ttimeoutlen=50
 """ Load plugins and start
 set rtp+=/etc/vim
 runtime! conf.d/*.vim
-
-syntax on
-filetype indent on
-filetype plugin indent on
