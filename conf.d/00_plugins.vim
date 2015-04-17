@@ -17,8 +17,8 @@ Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
 Plugin 'mileszs/ack.vim'
 Plugin 'moll/vim-bbye'
-Plugin 'nacitar/terminalkeys.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-dispatch'
@@ -32,18 +32,20 @@ Plugin 'xolox/vim-notes'
 call vundle#end()
 filetype plugin indent on
 
-
 " colorscheme
 if has('gui_running')
   set background=dark
   colorscheme base16-default
+  hi SpecialKey guifg=darkgrey
 else
   set background=light
   hi LineNr ctermfg=yellow ctermbg=none
   hi SignColumn ctermbg=none
   hi Visual cterm=reverse ctermbg=black
-  hi Search ctermfg=black
+  hi Search cterm=bold ctermfg=black
+  hi Normal ctermbg=234
   hi ColorColumn ctermbg=235
+  hi SpecialKey ctermfg=darkgrey
 end
 
 " airline
@@ -77,11 +79,12 @@ let g:ctrlp_user_command={
       \}
 
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_map = '<leader>q'
+let g:ctrlp_map = ''
 
-nnoremap <leader>w :CtrlPCurWD<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
-nnoremap <leader>e :CtrlPClearAllCaches<cr>
+" ultisnips
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " syntastic
 let g:syntastic_check_on_open=1
@@ -90,10 +93,10 @@ let g:syntastic_enable_highlighting=0
 let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
 " gutter
+let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
 
 " undotree
-nnoremap <leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_TreeNodeShape = 'o'
 let g:undotree_SplitWidth = 40
