@@ -8,9 +8,10 @@ Plugin 'amiorin/vim-project'
 Plugin 'bling/vim-airline'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'chriskempson/base16-vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'felikz/ctrlp-py-matcher'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'haya14busa/vim-asterisk'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
@@ -24,7 +25,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar'
+Plugin 'jeetsukumaran/vim-filebeagle'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
@@ -52,6 +53,7 @@ end
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='bubblegum'
+let g:airline_section_c='%{fnamemodify(expand("%"), ":~:.")}'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -81,6 +83,13 @@ let g:ctrlp_user_command={
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_map = ''
 
+" asterisk
+let g:asterisk#keeppos = 1
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
+
 " ultisnips
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
@@ -96,6 +105,27 @@ let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
 
+let g:gitgutter_diffs = {'HEAD': 'HEAD', 'master': 'master'}
+let g:gitgutter_diff_name = 'HEAD'
+let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
+
+command! GitGutterBaseToggle :call GitGutterBaseToggle()
+function! GitGutterBaseToggle()
+  if empty(g:gitgutter_diffs)
+    echo 'Gitgutter: g:gitgutter_diffs is empty'
+  else
+    let diff_names = sort(keys(g:gitgutter_diffs))
+
+    " If not found in list, index will return -1 and we fetch first vaue.
+    let curr_ix = index(diff_names, g:gitgutter_diff_name)
+    let g:gitgutter_diff_name = get(diff_names, curr_ix + 1, diff_names[0])
+    let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
+
+    echo 'GitGutter: diffing against' g:gitgutter_diff_name
+    call gitgutter#enable()
+  endif
+endfunction
+
 " undotree
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_TreeNodeShape = 'o'
@@ -103,6 +133,9 @@ let g:undotree_SplitWidth = 40
 
 " ack
 let g:ack_use_dispatch = 1
+
+" filebeagle
+let g:filebeagle_show_hidden = 1
 
 " notes
 let g:notes_directories = ['~/notes']

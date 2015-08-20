@@ -41,6 +41,9 @@ nmap <silent> <leader>7 <Plug>AirlineSelectTab7
 nmap <silent> <leader>8 <Plug>AirlineSelectTab8
 nmap <silent> <leader>9 <Plug>AirlineSelectTab9
 
+nmap <leader>gb :Gblame<cr>
+nnoremap <leader>gs :GitGutterBaseToggle<cr>
+
 " sane arrow key behaviour
 nmap <S-Up> Vk
 nmap <S-Down> Vj
@@ -67,3 +70,6 @@ nnoremap <silent> <cr> :silent noh<cr><cr>
 " show trailing whitespace
 set list lcs=tab:>\ ,trail:-
 nnoremap <silent> <leader>s :set list!<cr>
+
+" toggle paste mode
+set pastetoggle=<F2>
