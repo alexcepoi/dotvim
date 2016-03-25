@@ -5,7 +5,6 @@ call vundle#begin('/etc/vim/bundle')
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'amiorin/vim-project'
-Plugin 'bling/vim-airline'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'chriskempson/base16-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -27,6 +26,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'jeetsukumaran/vim-filebeagle'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 
@@ -36,6 +37,7 @@ filetype plugin indent on
 " colorscheme
 if has('gui_running')
   set background=dark
+  set guifont=Monospace\ 8
   colorscheme base16-default
   hi SpecialKey guifg=darkgrey
 else
@@ -44,7 +46,7 @@ else
   hi SignColumn ctermbg=none
   hi Visual cterm=reverse ctermbg=black
   hi Search cterm=bold ctermfg=black
-  hi Normal ctermbg=234
+  " hi Normal ctermbg=234
   hi ColorColumn ctermbg=235
   hi SpecialKey ctermfg=darkgrey
 end
@@ -53,11 +55,20 @@ end
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='bubblegum'
-let g:airline_section_c='%{fnamemodify(expand("%"), ":~:.")}'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#whitespace#enabled=0
+
+let g:airline_fnamemod = ":~:."
+function! AirlineInit()
+  let fname = '%{fnamemodify(expand("%:p"), "' .  g:airline_fnamemod . '")}'
+  let g:airline_section_c = airline#section#create(['%<']) . fname .
+        \ airline#section#create([' ', 'readonly'])
+endfunction
+if has("autocmd")
+  autocmd User AirlineAfterInit call AirlineInit()
+endif
 
 " gist
 let g:gist_detect_filetype=1
@@ -73,12 +84,12 @@ else
 endif
 
 let g:ctrlp_user_command={
-      \  'types': {
-      \    1: ['.git', 'cd %s && git ls-files'],
-      \    2: ['.hg', 'hg --cwd %s locate -I .'],
-      \  },
-      \  'fallback': s:ctrlp_fallback
-      \}
+      \   'types': {
+      \     1: ['.git', 'cd %s && git ls-files'],
+      \     2: ['.hg', 'hg --cwd %s locate -I .'],
+      \   },
+      \   'fallback': s:ctrlp_fallback
+      \ }
 
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_map = ''
@@ -101,7 +112,7 @@ let g:syntastic_mode_map = {'mode': 'passive'}
 let g:syntastic_enable_highlighting=0
 let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
-" gutter
+" gitgutter
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
 

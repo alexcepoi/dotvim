@@ -73,3 +73,8 @@ nnoremap <silent> <leader>s :set list!<cr>
 
 " toggle paste mode
 set pastetoggle=<F2>
+
+" always open help in vertical pane
+if has("autocmd")
+  autocmd FileType help wincmd L
+endif
