@@ -68,7 +68,7 @@ nnoremap Y y$
 nnoremap <silent> <cr> :silent noh<cr><cr>
 
 " show trailing whitespace
-set list lcs=tab:>\ ,trail:-
+set list lcs=tab:\ \ ,trail:-
 nnoremap <silent> <leader>s :set list!<cr>
 
 " toggle paste mode

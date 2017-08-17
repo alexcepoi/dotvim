@@ -8,10 +8,12 @@ Plugin 'amiorin/vim-project'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'chriskempson/base16-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'fatih/vim-go'
 Plugin 'felikz/ctrlp-py-matcher'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'haya14busa/vim-asterisk'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
@@ -120,7 +122,23 @@ let g:gitgutter_diffs = {'HEAD': 'HEAD', 'master': 'master'}
 let g:gitgutter_diff_name = 'HEAD'
 let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
 
-command! GitGutterBaseToggle :call GitGutterBaseToggle()
+function! GitGutterEnable()
+  if empty(g:gitgutter_diffs)
+    echo 'Gitgutter: g:gitgutter_diffs is empty'
+  else
+    let diff_names = sort(keys(g:gitgutter_diffs))
+
+    let curr_ix = index(diff_names, g:gitgutter_diff_name)
+    if curr_ix == -1
+      echo 'Gitgutter: g:gitgutter_name is not present in g:gitgutter_diffs'
+    else
+      let g:gitgutter_diff_name = get(diff_names, curr_ix, diff_names[0])
+      let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
+      call gitgutter#enable()
+    endif
+  endif
+endfunction
+
 function! GitGutterBaseToggle()
   if empty(g:gitgutter_diffs)
     echo 'Gitgutter: g:gitgutter_diffs is empty'
@@ -133,9 +151,17 @@ function! GitGutterBaseToggle()
     let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
 
     echo 'GitGutter: diffing against' g:gitgutter_diff_name
-    call gitgutter#enable()
+    call GitGutterEnable()
   endif
 endfunction
+
+if has("autocmd")
+  augroup enter
+    autocmd!
+    autocmd VimEnter * call GitGutterEnable()
+  augroup END
+endif
+command! GitGutterBaseToggle :call GitGutterBaseToggle()
 
 " undotree
 let g:undotree_SetFocusWhenToggle = 1
@@ -150,3 +176,11 @@ let g:filebeagle_show_hidden = 1
 
 " notes
 let g:notes_directories = ['~/notes']
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
