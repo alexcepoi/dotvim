@@ -68,11 +68,14 @@ nnoremap Y y$
 nnoremap <silent> <cr> :silent noh<cr><cr>
 
 " show trailing whitespace
-set list lcs=tab:\ \ ,trail:-
+set list lcs=tab:\ \ ,trail:-,nbsp:¬
 nnoremap <silent> <leader>s :set list!<cr>
 
 " toggle paste mode
 set pastetoggle=<F2>
+
+" toggle tagbar
+nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " always open help in vertical pane
 if has("autocmd")

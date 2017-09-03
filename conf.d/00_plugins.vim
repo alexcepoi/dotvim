@@ -14,6 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'haya14busa/vim-asterisk'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
@@ -39,7 +40,7 @@ filetype plugin indent on
 " colorscheme
 if has('gui_running')
   set background=dark
-  set guifont=Monospace\ 8
+  set guifont=Monospace\ 9
   colorscheme base16-default
   hi SpecialKey guifg=darkgrey
 else
@@ -60,6 +61,7 @@ let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#whitespace#enabled=0
 
 let g:airline_fnamemod = ":~:."
@@ -173,6 +175,12 @@ let g:ack_use_dispatch = 1
 
 " filebeagle
 let g:filebeagle_show_hidden = 1
+
+" tagbar
+let g:tagbar_vertical = 50
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_compact = 1
 
 " notes
 let g:notes_directories = ['~/notes']

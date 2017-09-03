@@ -1,4 +1,5 @@
 bundle/
+localconf.d/
 vimrc
 vimrc.tiny
 gvimrc
