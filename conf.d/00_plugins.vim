@@ -1,44 +1,39 @@
 " plugins setup
-filetype off
-set rtp+=/etc/vim/bundle/Vundle.vim
-call vundle#begin('/etc/vim/bundle')
-
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'amiorin/vim-project'
-Plugin 'blueyed/vim-diminactive'
-Plugin 'chriskempson/base16-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'fatih/vim-go'
-Plugin 'felikz/ctrlp-py-matcher'
-Plugin 'haya14busa/vim-asterisk'
-Plugin 'houtsnip/vim-emacscommandline'
-Plugin 'jeetsukumaran/vim-filebeagle'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mattn/gist-vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'mbbill/undotree'
-Plugin 'moll/vim-bbye'
-Plugin 'prabirshrestha/async.vim'
-Plugin 'prabirshrestha/asyncomplete-lsp.vim'
-Plugin 'prabirshrestha/asyncomplete.vim'
-Plugin 'prabirshrestha/vim-lsp'
-Plugin 'scrooloose/syntastic'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-
-call vundle#end()
-filetype plugin indent on
+if !empty(glob('/etc/vim/autoload/plug.vim'))
+  call plug#begin('/etc/vim/plugged')
+  Plug 'LaTeX-Box-Team/LaTeX-Box'
+  Plug 'Valloric/MatchTagAlways'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'blueyed/vim-diminactive'
+  Plug 'chriskempson/base16-vim'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'fatih/vim-go'
+  Plug 'felikz/ctrlp-py-matcher'
+  Plug 'haya14busa/vim-asterisk'
+  Plug 'houtsnip/vim-emacscommandline'
+  Plug 'jeetsukumaran/vim-filebeagle'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'majutsushi/tagbar'
+  Plug 'mattn/gist-vim'
+  Plug 'mattn/webapi-vim'
+  Plug 'mbbill/undotree'
+  Plug 'moll/vim-bbye'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'scrooloose/syntastic'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'tomtom/tcomment_vim'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-surround'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'xolox/vim-misc'
+  Plug 'xolox/vim-notes'
+  call plug#end()
+endif
 
 " colorscheme
 if has('gui_running')
@@ -138,7 +133,9 @@ function! GitGutterEnable()
     else
       let g:gitgutter_diff_name = get(diff_names, curr_ix, diff_names[0])
       let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
-      call gitgutter#enable()
+      if exists("gitgutter#enable")
+        call gitgutter#enable()
+      endif
     endif
   endif
 endfunction

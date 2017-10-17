@@ -1,5 +1,9 @@
-bundle/
+# Plugins
+autoload/plug.vim
+plugged/
 localconf.d/
+
+# Distro files
 vimrc
 vimrc.tiny
 gvimrc
