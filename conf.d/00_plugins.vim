@@ -3,6 +3,9 @@ filetype off
 set rtp+=/etc/vim/bundle/Vundle.vim
 call vundle#begin('/etc/vim/bundle')
 
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'amiorin/vim-project'
 Plugin 'blueyed/vim-diminactive'
@@ -10,25 +13,25 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'fatih/vim-go'
 Plugin 'felikz/ctrlp-py-matcher'
-Plugin 'gmarik/Vundle.vim'
 Plugin 'haya14busa/vim-asterisk'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'houtsnip/vim-emacscommandline'
+Plugin 'jeetsukumaran/vim-filebeagle'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
-Plugin 'mileszs/ack.vim'
 Plugin 'moll/vim-bbye'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/vim-lsp'
 Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'jeetsukumaran/vim-filebeagle'
-Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'xolox/vim-misc'
@@ -40,8 +43,8 @@ filetype plugin indent on
 " colorscheme
 if has('gui_running')
   set background=dark
-  set guifont=Monospace\ 9
-  colorscheme base16-default
+  set guifont=Dejavu\ Sans\ Mono\ 9
+  colorscheme base16-default-dark
   hi SpecialKey guifg=darkgrey
 else
   set background=light
@@ -53,6 +56,10 @@ else
   hi ColorColumn ctermbg=235
   hi SpecialKey ctermfg=darkgrey
 end
+
+" scrolling
+noremap <C-f> 2<C-d>
+noremap <C-b> 2<C-u>
 
 " airline
 let g:airline_left_sep=''
@@ -105,11 +112,6 @@ map #  <Plug>(asterisk-z#)
 map g* <Plug>(asterisk-gz*)
 map g# <Plug>(asterisk-gz#)
 
-" ultisnips
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-
 " syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_mode_map = {'mode': 'passive'}
@@ -118,7 +120,7 @@ let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
 " gitgutter
 let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 
 let g:gitgutter_diffs = {'HEAD': 'HEAD', 'master': 'master'}
 let g:gitgutter_diff_name = 'HEAD'
@@ -170,9 +172,6 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_TreeNodeShape = 'o'
 let g:undotree_SplitWidth = 40
 
-" ack
-let g:ack_use_dispatch = 1
-
 " filebeagle
 let g:filebeagle_show_hidden = 1
 
@@ -182,9 +181,7 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 1
 
-" notes
-let g:notes_directories = ['~/notes']
-
+" vim-go
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -192,3 +189,6 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
+" notes
+let g:notes_directories = ['~/notes']

@@ -58,12 +58,6 @@ imap <S-Down> <Esc>Vj
 imap <S-Left> <Esc>vb
 imap <S-Right> <Esc>lvw
 
-" change directory to current file
-nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" make Y behave like other capitals
-nnoremap Y y$
-
 " type <enter> after search to clear results
 nnoremap <silent> <cr> :silent noh<cr><cr>
 
@@ -77,7 +71,5 @@ set pastetoggle=<F2>
 " toggle tagbar
 nnoremap <silent> <leader>t :TagbarToggle<CR>
 
-" always open help in vertical pane
-if has("autocmd")
-  autocmd FileType help wincmd L
-endif
+" make Y behave like other capitals
+nnoremap Y y$
