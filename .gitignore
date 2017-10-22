@@ -1,9 +1,6 @@
 # Plugins
 autoload/plug.vim
 plugged/
-localconf.d/
 
-# Distro files
-vimrc
-vimrc.tiny
-gvimrc
+# Local untracked vim configs
+localconf.d/
