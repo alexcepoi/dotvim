@@ -92,6 +92,12 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:syntastic_enable_highlighting=0
   let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
+  " polyglot
+  let g:polyglot_disabled = ['c/c++', 'c++11']
+
+  " auto-pairs
+  let g:AutoPairsMultilineClose=0
+
   " gitgutter
   let g:gitgutter_map_keys = 0
   set signcolumn=yes
