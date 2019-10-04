@@ -1,7 +1,6 @@
 """ Plugin setup
 if !empty(glob('~/.vim/autoload/plug.vim'))
   call plug#begin('~/.vim/plugged')
-  Plug 'Valloric/MatchTagAlways'
   Plug 'airblade/vim-gitgutter'
   Plug 'blueyed/vim-diminactive'
   Plug 'chriskempson/base16-vim'
