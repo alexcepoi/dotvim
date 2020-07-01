@@ -37,5 +37,5 @@ let g:netrw_list_hide = '^\./$'
 nnoremap <silent> - :Explore<cr>
 augroup dotvim_netrw
   autocmd!
-  autocmd FileType netrw noremap <unique> <buffer> <silent> <nowait> q :Rex<cr>
+  autocmd FileType netrw noremap <buffer> <silent> <nowait> q :Rex<cr>
 augroup end
