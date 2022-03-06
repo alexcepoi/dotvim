@@ -1,31 +1,26 @@
 """ Plugin setup
 if !empty(glob('~/.vim/autoload/plug.vim'))
+  " polyglot
+  let g:polyglot_disabled = ['c/c++', 'c++11']
+
   call plug#begin('~/.vim/plugged')
-  Plug 'airblade/vim-gitgutter'
-  Plug 'blueyed/vim-diminactive'
-  Plug 'chriskempson/base16-vim'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'chriskempson/base16-vim'
   Plug 'felikz/ctrlp-py-matcher'
   Plug 'haya14busa/vim-asterisk'
   Plug 'houtsnip/vim-emacscommandline'
-  Plug 'jeetsukumaran/vim-filebeagle'
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'justinmk/vim-dirvish'
+  Plug 'eapache/auto-pairs'
   Plug 'majutsushi/tagbar'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'mbbill/undotree'
+  Plug 'mhinz/vim-signify'
   Plug 'moll/vim-bbye'
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/vim-lsp'
   Plug 'scrooloose/syntastic'
   Plug 'sheerun/vim-polyglot'
-  Plug 'terryma/vim-multiple-cursors'
   Plug 'tomtom/tcomment_vim'
-  Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-surround'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'xolox/vim-misc'
@@ -43,6 +38,9 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:airline#extensions#tagbar#enabled = 0
   let g:airline#extensions#whitespace#enabled=0
 
+  " Workaround for misterious `undefined b:buffer` error.
+  let g:airline#extensions#dirvish#enabled = 0
+
   let g:airline_fnamemod = ":~:."
   function! AirlineInit()
     let fname = '%{fnamemodify(expand("%:p"), "' .  g:airline_fnamemod . '")}'
@@ -53,6 +51,16 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
     autocmd!
     autocmd User AirlineAfterInit call AirlineInit()
   augroup end
+
+  " dirvish
+  let g:dirvish_mode = ':sort ,^.*[\/],'
+  nmap - <Plug>(dirvish_up)
+  augroup dirvish_config
+    autocmd!
+    autocmd FileType dirvish nmap <buffer> q <Plug>(dirvish_quit)
+    autocmd FileType dirvish silent! unmap <buffer> /
+    autocmd FileType dirvish silent! unmap <buffer> ?
+  augroup END
 
   " gist
   let g:gist_detect_filetype=1
@@ -76,7 +84,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
         \ }
 
   let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-  let g:ctrlp_map = ''
+  " let g:ctrlp_map = ''
 
   " asterisk
   let g:asterisk#keeppos = 1
@@ -91,68 +99,21 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:syntastic_enable_highlighting=0
   let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
 
-  " polyglot
-  let g:polyglot_disabled = ['c/c++', 'c++11']
-
   " auto-pairs
-  let g:AutoPairsMultilineClose=0
+  let g:AutoPairsUseInsertedCount=1
+  let g:AutoPairsMultilineClose=1
 
-  " gitgutter
-  let g:gitgutter_map_keys = 0
+  " signify
   set signcolumn=yes
-
-  let g:gitgutter_diffs = {'HEAD': 'HEAD', 'master': 'master'}
-  let g:gitgutter_diff_name = 'HEAD'
-  let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
-
-  function! GitGutterEnable()
-    if empty(g:gitgutter_diffs)
-      echo 'Gitgutter: g:gitgutter_diffs is empty'
-    else
-      let diff_names = sort(keys(g:gitgutter_diffs))
-
-      let curr_ix = index(diff_names, g:gitgutter_diff_name)
-      if curr_ix == -1
-        echo 'Gitgutter: g:gitgutter_name is not present in g:gitgutter_diffs'
-      else
-        let g:gitgutter_diff_name = get(diff_names, curr_ix, diff_names[0])
-        let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
-        if exists("gitgutter#enable")
-          call gitgutter#enable()
-        endif
-      endif
-    endif
-  endfunction
-
-  function! GitGutterBaseToggle()
-    if empty(g:gitgutter_diffs)
-      echo 'Gitgutter: g:gitgutter_diffs is empty'
-    else
-      let diff_names = sort(keys(g:gitgutter_diffs))
-
-      " If not found in list, index will return -1 and we fetch first vaue.
-      let curr_ix = index(diff_names, g:gitgutter_diff_name)
-      let g:gitgutter_diff_name = get(diff_names, curr_ix + 1, diff_names[0])
-      let g:gitgutter_diff_args = g:gitgutter_diffs[g:gitgutter_diff_name]
-
-      echo 'GitGutter: diffing against' g:gitgutter_diff_name
-      call GitGutterEnable()
-    endif
-  endfunction
-
-  augroup dotvim_gutter
-    autocmd!
-    autocmd VimEnter * call GitGutterEnable()
-  augroup end
-  command! GitGutterBaseToggle :call GitGutterBaseToggle()
+  let g:signify_vcs_list = [ 'git', 'hg' ]
+  let g:signify_sign_change = '~'
+  let g:signify_sign_show_count = 0
+  let g:signify_realtime = 1
 
   " undotree
   let g:undotree_SetFocusWhenToggle = 1
   let g:undotree_TreeNodeShape = 'o'
   let g:undotree_SplitWidth = 40
-
-  " filebeagle
-  let g:filebeagle_show_hidden = 1
 
   " tagbar
   let g:tagbar_vertical = 50

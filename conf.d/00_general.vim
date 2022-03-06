@@ -9,6 +9,7 @@ set showcmd
 set number
 set laststatus=2
 set ttimeoutlen=50
+set mouse=a
 
 set noerrorbells visualbell t_vb=
 augroup dotvim_gui
@@ -26,6 +27,9 @@ set guiheadroom=0
 set background=light
 hi LineNr ctermfg=yellow ctermbg=none
 hi SignColumn ctermbg=none
+highlight SignifySignAdd    ctermbg=none ctermfg=119
+highlight SignifySignDelete ctermbg=none ctermfg=167
+highlight SignifySignChange ctermbg=none ctermfg=227
 hi Visual cterm=reverse ctermbg=black
 hi Search cterm=bold ctermfg=black
 hi ColorColumn ctermbg=235
