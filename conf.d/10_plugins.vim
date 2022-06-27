@@ -23,8 +23,6 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'xolox/vim-misc'
-  Plug 'xolox/vim-notes'
   call plug#end()
 
   " airline
@@ -147,7 +145,6 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   nnoremap <silent> <leader>b :CtrlPBuffer<cr>
   nnoremap <silent> <leader>e :CtrlPClearAllCaches<cr>
   nnoremap <silent> <leader>u :UndotreeToggle<CR>
-  nnoremap <silent> <leader>gs :GitGutterBaseToggle<cr>
   nnoremap <silent> <leader>t :TagbarToggle<cr>
 
   nnoremap <silent> <M-j> :Bd!<cr>
