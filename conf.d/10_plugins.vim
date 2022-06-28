@@ -12,6 +12,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   Plug 'justinmk/vim-dirvish'
   Plug 'eapache/auto-pairs'
   Plug 'majutsushi/tagbar'
+  Plug 'markonm/traces.vim'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'mbbill/undotree'
