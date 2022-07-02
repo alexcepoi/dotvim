@@ -34,10 +34,10 @@ let g:netrw_dirhistmax = 0
 let g:netrw_hide = 1
 let g:netrw_list_hide = '^\./$'
 
-nnoremap <silent> - :Explore<cr>
+noremap <silent> - :Explore!<cr>
 augroup dotvim_netrw
   autocmd!
-  autocmd FileType netrw noremap <buffer> <silent> <nowait> q :Rex<cr>
+  autocmd FileType netrw noremap <buffer> <silent> <nowait> q :bd<cr>
 augroup end
 
 """ Close hidden buffers

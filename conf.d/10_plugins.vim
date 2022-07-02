@@ -1,30 +1,29 @@
 """ Plugin setup
 if !empty(glob('~/.vim/autoload/plug.vim'))
-  " polyglot
-  let g:polyglot_disabled = ['c/c++', 'c++11']
-
-  call plug#begin('~/.vim/plugged')
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'chriskempson/base16-vim'
-  Plug 'felikz/ctrlp-py-matcher'
+  call plug#begin()
+  Plug 'base16-project/base16-vim'
   Plug 'haya14busa/vim-asterisk'
   Plug 'houtsnip/vim-emacscommandline'
   Plug 'justinmk/vim-dirvish'
   Plug 'eapache/auto-pairs'
-  Plug 'majutsushi/tagbar'
   Plug 'markonm/traces.vim'
-  Plug 'mattn/gist-vim'
-  Plug 'mattn/webapi-vim'
   Plug 'mbbill/undotree'
   Plug 'mhinz/vim-signify'
   Plug 'moll/vim-bbye'
+  Plug 'ojroques/vim-oscyank'
+  Plug 'prabirshrestha/vim-lsp'
   Plug 'scrooloose/syntastic'
-  Plug 'sheerun/vim-polyglot'
   Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   call plug#end()
+
+  " Fix yanking via remote terminal
+  augroup dotvim_oscyank
+    autocmd!
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+  augroup end
 
   " airline
   set noshowmode
@@ -34,11 +33,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:airline#extensions#tabline#enabled=1
   let g:airline#extensions#tabline#fnamemod = ':t'
   let g:airline#extensions#tabline#buffer_idx_mode = 1
-  let g:airline#extensions#tagbar#enabled = 0
   let g:airline#extensions#whitespace#enabled=0
-
-  " Workaround for misterious `undefined b:buffer` error.
-  let g:airline#extensions#dirvish#enabled = 0
 
   let g:airline_fnamemod = ":~:."
   function! AirlineInit()
@@ -52,38 +47,14 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   augroup end
 
   " dirvish
-  let g:dirvish_mode = ':sort ,^.*[\/],'
   nmap - <Plug>(dirvish_up)
-  augroup dirvish_config
+  let g:dirvish_mode = ':sort ,^.*[\/],'
+  augroup dotvim_dirvish
     autocmd!
     autocmd FileType dirvish nmap <buffer> q <Plug>(dirvish_quit)
     autocmd FileType dirvish silent! unmap <buffer> /
     autocmd FileType dirvish silent! unmap <buffer> ?
   augroup END
-
-  " gist
-  let g:gist_detect_filetype=1
-  let g:gist_open_browser_after_post=1
-  let g:gist_show_privates=1
-  let g:gist_post_private=1
-
-  " ctrlp
-  if executable('ag')
-    let s:ctrlp_fallback = 'ag %s -i --nocolor --nogroup --hidden -g ""'
-  else
-    let s:ctrlp_fallback = 'find %s -type f'
-  endif
-
-  let g:ctrlp_user_command={
-        \   'types': {
-        \     1: ['.git', 'cd %s && git ls-files'],
-        \     2: ['.hg', 'hg --cwd %s locate -I .'],
-        \   },
-        \   'fallback': s:ctrlp_fallback
-        \ }
-
-  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-  " let g:ctrlp_map = ''
 
   " asterisk
   let g:asterisk#keeppos = 1
@@ -93,7 +64,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   map g# <Plug>(asterisk-gz#)
 
   " syntastic
-  let g:syntastic_check_on_open=1
+  " let g:syntastic_check_on_open=1
   let g:syntastic_mode_map = {'mode': 'passive'}
   let g:syntastic_enable_highlighting=0
   let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
@@ -114,12 +85,6 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:undotree_TreeNodeShape = 'o'
   let g:undotree_SplitWidth = 40
 
-  " tagbar
-  let g:tagbar_vertical = 50
-  let g:tagbar_autofocus = 1
-  let g:tagbar_autoclose = 1
-  let g:tagbar_compact = 1
-
   " vim-go
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
@@ -128,9 +93,6 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
   let g:go_fmt_command = "goimports"
-
-  " notes
-  let g:notes_directories = ['~/notes']
 
   " colorscheme
   if has('gui_running')
@@ -141,12 +103,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   endif
 
   " mappings
-  nnoremap <silent> <leader>w :CtrlPCurWD<cr>
-  nnoremap <silent> <leader>W :CtrlP<cr>
-  nnoremap <silent> <leader>b :CtrlPBuffer<cr>
-  nnoremap <silent> <leader>e :CtrlPClearAllCaches<cr>
   nnoremap <silent> <leader>u :UndotreeToggle<CR>
-  nnoremap <silent> <leader>t :TagbarToggle<cr>
 
   nnoremap <silent> <M-j> :Bd!<cr>
   nnoremap <silent> <leader>j :Bd!<cr>
