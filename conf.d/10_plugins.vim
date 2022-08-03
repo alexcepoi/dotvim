@@ -11,10 +11,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   Plug 'mhinz/vim-signify'
   Plug 'moll/vim-bbye'
   Plug 'ojroques/vim-oscyank'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'scrooloose/syntastic'
   Plug 'tomtom/tcomment_vim'
-  Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   call plug#end()
@@ -63,12 +60,6 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   map g* <Plug>(asterisk-gz*)
   map g# <Plug>(asterisk-gz#)
 
-  " syntastic
-  " let g:syntastic_check_on_open=1
-  let g:syntastic_mode_map = {'mode': 'passive'}
-  let g:syntastic_enable_highlighting=0
-  let g:syntastic_stl_format='%E{E%e}%B{, }%W{W%w}'
-
   " auto-pairs
   let g:AutoPairsUseInsertedCount=1
   let g:AutoPairsMultilineClose=1
@@ -85,21 +76,10 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   let g:undotree_TreeNodeShape = 'o'
   let g:undotree_SplitWidth = 40
 
-  " vim-go
-  let g:go_highlight_functions = 1
-  let g:go_highlight_methods = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_types = 1
-  let g:go_highlight_operators = 1
-  let g:go_highlight_build_constraints = 1
-  let g:go_fmt_command = "goimports"
-
   " colorscheme
   if has('gui_running')
     set background=dark
-    set guifont=Dejavu\ Sans\ Mono\ 9
     colorscheme base16-default-dark
-    hi SpecialKey guifg=darkgrey
   endif
 
   " mappings
