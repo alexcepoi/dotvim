@@ -19,7 +19,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   " Fix yanking via remote terminal
   augroup dotvim_oscyank
     autocmd!
-    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
   augroup end
 
   " airline

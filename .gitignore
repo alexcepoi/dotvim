@@ -1,5 +1,5 @@
 # Plugins
-autoload/plug.vim
+autoload/plug.vim*
 plugged/
 
 # Local untracked vim configs
